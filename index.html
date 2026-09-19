@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portofolio Kelompok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #14100C;
+    --panel: #1A1410;
+    --card: #16110D;
+    --line: #33281F;
+    --ink: #EFE6D4;
+    --muted: #A29380;
+    --accent: #C9683C;
+    --accent-hi: #A5502B;
+    --glow: rgba(201, 104, 60, .45);
+    --mark: #C99A3B;
+    --font-display: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+    --font-ui: "Chakra Petch", system-ui, sans-serif;
+    --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: radial-gradient(90% 45% at 0% 0%, rgba(138, 154, 91, .12), transparent 60%), var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 56px 20px 72px; }
+  :focus-visible { outline: 3px solid var(--mark); outline-offset: 2px; }
+
+  /* ---------- Hero ---------- */
+  .hero { margin-bottom: 48px; }
+  .hero h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 9vw, 5rem);
+    line-height: 1.05; letter-spacing: .02em; text-transform: uppercase;
+    transform: skewX(-8deg); transform-origin: left bottom;
+    max-width: 14ch;
+  }
+  .hero p { margin: 18px 0 0; max-width: 52ch; color: var(--muted); font-size: 1.05rem; }
+  .hero .where { margin-top: 6px; font-size: .95rem; }
+
+  /* ---------- Tombol OPEN / tombol hero ---------- */
+  .open, .jump {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-ui);
+    font-weight: 700; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    color: #FFF7EA;
+    background: linear-gradient(180deg, var(--accent), var(--accent-hi));
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 10px;
+    padding: 9px 16px; min-height: 40px;
+    box-shadow: 0 0 18px var(--glow);
+  }
+  .open:hover, .jump:hover { filter: brightness(1.12); }
+  .open { flex: none; position: relative; z-index: 2; }
+  .open.off { background: #1F1813; color: var(--muted); box-shadow: none; border-color: var(--line); }
+  .jump { margin-top: 24px; }
+
+  /* ---------- Panel (Anggota & Project) ---------- */
+  .panel {
+    background: radial-gradient(120% 80% at 100% 0%, rgba(201, 104, 60, .12), transparent 55%), var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 40px 36px;
+    margin-bottom: 32px;
+  }
+  .pj-label {
+    margin: 0 0 6px;
+    font-family: var(--font-ui);
+    font-weight: 600; font-size: .8rem;
+    letter-spacing: .28em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pj-title {
+    margin: 0 0 28px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    line-height: 1.1; letter-spacing: .02em; text-transform: uppercase;
+    transform: skewX(-10deg); transform-origin: left center;
+  }
+  .pj-title em { font-style: normal; color: var(--accent); text-shadow: 0 0 18px var(--glow); }
+
+  /* ---------- Anggota (kartu) ---------- */
+  .members { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .id-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 44px 18px 18px;
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr);
+    gap: 18px;
+  }
+  .id-card::before {
+    content: "";
+    position: absolute; top: 14px; left: 50%;
+    width: 56px; height: 12px; transform: translateX(-50%);
+    background: var(--mark);
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 3px var(--card);
+  }
+  .photo {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    align-self: center;
+    border-radius: 50%;
+    border: 2px dashed var(--line);
+    background: linear-gradient(135deg, #2A1A12, #17120E);
+    color: var(--muted);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    text-align: center; font-size: .78rem; padding: 12px;
+    overflow: hidden;
+  }
+  .photo svg { width: 30px; height: 30px; }
+  .photo.filled { border: 0; padding: 0; }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .info { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .info h3 {
+    margin: 0 0 12px;
+    font-family: var(--font-body); font-weight: 700; font-size: 1.25rem; line-height: 1.25;
+    word-break: break-word;
+  }
+  .info dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; }
+  .info dt { color: var(--muted); font-size: .9rem; }
+  .info dd { margin: 0; font-weight: 600; word-break: break-word; }
+
+  /* ---------- Project (kartu + tombol OPEN) ---------- */
+  .tasks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .task {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .thumb {
+    position: relative;
+    aspect-ratio: 5 / 2;
+    background: linear-gradient(135deg, #3A2116, #17120E);
+    color: var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: .85rem; padding: 10px;
+    overflow: hidden;
+  }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .task-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px; }
+  .task-name { min-width: 0; }
+  .task-name h3 { margin: 0; font-weight: 700; font-size: 1.15rem; line-height: 1.25; color: var(--ink); word-break: break-word; }
+  .task-name p { margin: 2px 0 0; font-size: .82rem; color: var(--muted); }
+  .empty { grid-column: 1 / -1; text-align: center; padding: 36px 12px; color: var(--muted); }
+
+  /* ---------- Timeline deadline ---------- */
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 70px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+  .tl-row { position: relative; display: grid; grid-template-columns: 52px 14px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding-bottom: 16px; }
+  .tl-row:last-child { padding-bottom: 0; }
+  .tl-date { text-align: right; color: var(--muted); font-size: .85rem; line-height: 1.3; }
+  .tl-date b { display: block; font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .tl-dot { position: relative; z-index: 1; width: 12px; height: 12px; margin: 5px 0 0 1px; border-radius: 50%; border: 2px solid var(--mark); background: var(--panel); }
+  .tl-dot.on { background: var(--accent); border-color: var(--accent); }
+  .tl-name { font-weight: 700; word-break: break-word; }
+  .tl-note { color: var(--muted); font-size: .88rem; }
+  .tl-badge { font-size: .8rem; padding: 3px 10px; border-radius: 999px; background: #2A1A12; color: #E8A47F; white-space: nowrap; }
+
+  /* ---------- Kartu bisa diklik + pop-up detail ---------- */
+  .hit { position: absolute; inset: 0; z-index: 1; width: 100%; border: 0; border-radius: 18px; background: transparent; cursor: pointer; padding: 0; }
+  .task:hover { border-color: var(--accent); }
+  .hit:focus-visible { outline: 3px solid var(--mark); outline-offset: -3px; }
+  dialog {
+    width: calc(100% - 32px); max-width: 520px;
+    padding: 0; border: 1px solid #4A3A2C; border-radius: 18px;
+    background: var(--panel); color: var(--ink);
+  }
+  dialog::backdrop { background: rgba(10, 7, 5, .72); }
+  .dlg-body { padding: 24px; }
+  .dlg-course { margin: 0; color: var(--accent); font-weight: 700; font-size: .85rem; }
+  .dlg-title { margin: 2px 0 4px; font-size: 1.35rem; line-height: 1.25; font-weight: 700; word-break: break-word; }
+  .dlg-meta { margin: 0; color: var(--muted); font-size: .9rem; }
+  .dlg-desc { margin: 16px 0 0; line-height: 1.65; }
+  .dlg-acts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 22px; }
+  .ghost {
+    font-family: var(--font-ui); font-weight: 600; font-size: .85rem;
+    color: var(--ink); background: transparent;
+    border: 1px solid #4A3A2C; border-radius: 10px;
+    padding: 9px 16px; min-height: 40px; cursor: pointer;
+  }
+  .ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .foot { margin-top: 40px; color: var(--muted); font-size: .88rem; }
+
+  @media (max-width: 860px) {
+    .members, .tasks { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 460px) {
+    .panel { padding: 28px 18px; }
+    .timeline::before { left: 62px; }
+    .tl-row { grid-template-columns: 44px 14px minmax(0, 1fr); }
+    .tl-badge { grid-column: 3; justify-self: start; }
+    .dlg-body { padding: 20px; }
+    .id-card { grid-template-columns: 1fr; }
+    .photo { max-width: 160px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1 id="groupName"></h1>
+    <p id="tagline"></p>
+    <p class="where" id="where"></p>
+    <a class="jump" href="#tugas">Lihat kumpulan tugas</a>
+  </header>
+
+  <section class="panel" aria-labelledby="t-anggota">
+    <p class="pj-label">Tim</p>
+    <h2 class="pj-title" id="t-anggota">Anggota <em>Kelompok</em></h2>
+    <div class="members" id="members"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="t-deadline">
+    <p class="pj-label">Deadline</p>
+    <h2 class="pj-title" id="t-deadline">Tugas <em>berikutnya</em></h2>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <section id="tugas" class="panel" aria-labelledby="t-tugas">
+    <p class="pj-label">Karya</p>
+    <h2 class="pj-title" id="t-tugas">Our <em>Projects</em></h2>
+    <ul class="tasks" id="tasks"></ul>
+  </section>
+
+  <dialog id="dlg" aria-label="Detail tugas"></dialog>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+/* =====================================================================
+   BAGIAN YANG DIEDIT: cukup ubah data di bawah ini, sisanya jangan diubah.
+   ===================================================================== */
+
+var KELOMPOK = {
+  nama: "Young Code Creator",
+  tagline: "Kumpulan tugas kuliah yang kami kerjakan bersama, lengkap dengan link dan file-nya.",
+  kampus: "Universitas Jabal Ghafur Sigli",
+  prodi: "Teknik Informatika"
+};
+
+/* Dua anggota. foto: isi path gambar, contoh "foto/anggota1.jpg".
+   Foto tampil berbentuk lingkaran, jadi pakai foto persegi 1:1 (sekitar 600 x 600 px) dengan wajah di tengah.
+   Kalau dikosongkan, yang tampil slot foto kosong. */
+var ANGGOTA = [
+  { nama: "Ulfa Mailani", npm: "24105111082", kelas: "5.3", foto: "foto1.png" },
+  { nama: "Intan Mauli Zahra", npm: "24105111084", kelas: "5.3", foto: "foto/intan.jpg" }
+];
+
+/* Daftar deadline. Deadline yang tanggalnya sudah lewat otomatis disembunyikan.
+   - tanggal : "TAHUN-BULAN-TANGGAL", contoh "2026-09-22"
+   - catatan : keterangan singkat (boleh dikosongkan) */
+var DEADLINE = [
+  { judul: "Pengembangan Website absensi", tanggal: "2026-09-21", catatan: "RPL 2 · dikumpulkan lewat link" },
+]
+
+/* Daftar project/tugas. Tambah baru = salin satu blok { ... }, tempel, lalu ganti isinya.
+   - gambar    : path gambar sampul, contoh "gambar/rpl.jpg". Kosongkan "" kalau belum ada.
+   - tanggal   : tanggal pengerjaan, format "2026-09-12" (tampil di pop-up)
+   - oleh      : 0 = dikerjakan berdua, 1 = anggota 1, 2 = anggota 2
+   - deskripsi : penjelasan singkat, tampil di pop-up saat kartu diklik
+   - link      : alamat web (Google Drive, GitHub, dll). Kosongkan "" kalau tidak ada.
+   - file      : path file, contoh "tugas/laporan.pdf". Kosongkan "" kalau tidak ada.
+   Tombol OPEN di kartu membuka link dulu; kalau link kosong, membuka file.
+   Di pop-up, link dan file sama-sama muncul kalau diisi. */
+var TUGAS = [
+  {
+    judul: "Contoh: Laporan Analisis Kebutuhan",
+    matkul: "RPL 2",
+    gambar: "gambar/rpl.jpg",
+    tanggal: "2026-09-12",
+    oleh: 0,
+    deskripsi: "Berisi kebutuhan fungsional dan non-fungsional, plus use case utama aplikasi. Ganti dengan penjelasan tugas kamu.",
+    link: "https://drive.google.com",
+    file: ""
+  },
+  {
+    judul: "Contoh: Use Case dan Activity Diagram",
+    matkul: "RPL 2",
+    gambar: "gambar/diagram.jpg",
+    tanggal: "2026-09-05",
+    oleh: 1,
+    deskripsi: "Diagram alur untuk fitur login, pemesanan, dan pembayaran. Ganti dengan penjelasan tugas kamu.",
+    link: "",
+    file: "tugas/diagram.pdf"
+  }
+];
+
+/* =====================================================================
+   BATAS BAGIAN EDIT
+   ===================================================================== */
+
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function safeUrl(u) {
+    u = (u || "").trim();
+    if (!u) return "";
+    if (/^(javascript|data|vbscript):/i.test(u)) return "";
+    return u;
+  }
+
+  /* ----- hero ----- */
+  document.title = "Portofolio " + KELOMPOK.nama;
+  $("groupName").textContent = KELOMPOK.nama;
+  $("tagline").textContent = KELOMPOK.tagline;
+  $("where").textContent = [KELOMPOK.prodi, KELOMPOK.kampus].filter(Boolean).join(", ");
+  $("foot").textContent = "© " + new Date().getFullYear() + " " + KELOMPOK.nama;
+
+  /* ----- anggota ----- */
+  var cam = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.6-2h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.6"/></svg>';
+  function emptyPhoto(box) {
+    box.className = "photo";
+    box.textContent = "";
+    box.innerHTML = cam;
+    box.appendChild(el("span", null, "Foto belum diisi"));
+  }
+  ANGGOTA.forEach(function (m) {
+    var card = el("article", "id-card");
+    var photo = el("div", "photo");
+    var src = safeUrl(m.foto);
+    if (src) {
+      photo.className = "photo filled";
+      var img = el("img");
+      img.alt = "Foto " + m.nama;
+      img.loading = "lazy";
+      img.onerror = function () { emptyPhoto(photo); };
+      img.src = src;
+      photo.appendChild(img);
+    } else {
+      emptyPhoto(photo);
+    }
+    card.appendChild(photo);
+
+    var info = el("div", "info");
+    info.appendChild(el("h3", null, m.nama));
+    var dl = el("dl");
+    [["NPM", m.npm], ["Kelas", m.kelas]].forEach(function (r) {
+      dl.appendChild(el("dt", null, r[0]));
+      dl.appendChild(el("dd", null, r[1]));
+    });
+    info.appendChild(dl);
+    card.appendChild(info);
+    $("members").appendChild(card);
+  });
+
+  /* ----- timeline deadline ----- */
+  var MON = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+  function parseD(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || "");
+    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+  }
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var upcoming = DEADLINE.map(function (d) {
+    var dt = parseD(d.tanggal);
+    return dt ? { d: d, dt: dt, n: Math.round((dt - today) / 86400000) } : null;
+  }).filter(function (x) { return x && x.n >= 0; })
+    .sort(function (a, b) { return a.dt - b.dt; });
+
+  var tl = $("timeline");
+  if (!upcoming.length) {
+    tl.appendChild(el("li", "empty", "Belum ada deadline mendatang."));
+  }
+  upcoming.forEach(function (x, i) {
+    var row = el("li", "tl-row");
+    var date = el("div", "tl-date");
+    date.appendChild(el("b", null, String(x.dt.getDate())));
+    date.appendChild(document.createTextNode(MON[x.dt.getMonth()]));
+    row.appendChild(date);
+    row.appendChild(el("div", "tl-dot" + (i === 0 ? " on" : "")));
+    var txt = el("div");
+    txt.appendChild(el("div", "tl-name", x.d.judul));
+    if (x.d.catatan) txt.appendChild(el("div", "tl-note", x.d.catatan));
+    row.appendChild(txt);
+    row.appendChild(el("span", "tl-badge", x.n === 0 ? "Hari ini" : x.n === 1 ? "Besok" : x.n + " hari lagi"));
+    tl.appendChild(row);
+  });
+
+  /* ----- pop-up detail ----- */
+  var dlg = $("dlg");
+  function closeDlg() {
+    if (dlg.close) dlg.close(); else dlg.removeAttribute("open");
+  }
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) closeDlg(); });
+
+  function fmtLong(v) {
+    var d = parseD(v);
+    if (!d) return "";
+    try { return d.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }); }
+    catch (e) { return v; }
+  }
+  function whoText(n) {
+    if (n === 1 || n === 2) return "Dikerjakan oleh " + ((ANGGOTA[n - 1] && ANGGOTA[n - 1].nama) || ("Anggota " + n));
+    return "Dikerjakan berdua";
+  }
+  function openDetail(t) {
+    dlg.textContent = "";
+    var box = el("div", "dlg-body");
+    if (t.matkul) box.appendChild(el("p", "dlg-course", t.matkul));
+    box.appendChild(el("h3", "dlg-title", t.judul));
+    var meta = [];
+    if (fmtLong(t.tanggal)) meta.push(fmtLong(t.tanggal));
+    meta.push(whoText(t.oleh));
+    box.appendChild(el("p", "dlg-meta", meta.join(" \u00B7 ")));
+    if (t.deskripsi) box.appendChild(el("p", "dlg-desc", t.deskripsi));
+
+    var acts = el("div", "dlg-acts");
+    var close = el("button", "ghost", "Tutup");
+    close.type = "button";
+    close.addEventListener("click", closeDlg);
+    acts.appendChild(close);
+    [["Buka file", safeUrl(t.file)], ["Buka link", safeUrl(t.link)]].forEach(function (b) {
+      if (!b[1]) return;
+      var a = el("a", "open", b[0]);
+      a.href = b[1]; a.target = "_blank"; a.rel = "noopener noreferrer";
+      acts.appendChild(a);
+    });
+    box.appendChild(acts);
+    dlg.appendChild(box);
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  }
+
+  /* ----- project ----- */
+  var ul = $("tasks");
+  if (!TUGAS.length) {
+    ul.appendChild(el("li", "empty", "Belum ada project. Tambahkan yang pertama di bagian TUGAS pada file ini."));
+  }
+  TUGAS.forEach(function (t) {
+    var li = el("li", "task");
+
+    var thumb = el("div", "thumb");
+    function noImg() { thumb.textContent = t.matkul || "Gambar belum diisi"; }
+    var g = safeUrl(t.gambar);
+    if (g) {
+      var im = el("img");
+      im.alt = "";
+      im.loading = "lazy";
+      im.onerror = noImg;
+      im.src = g;
+      thumb.appendChild(im);
+    } else {
+      noImg();
+    }
+    li.appendChild(thumb);
+
+    var bar = el("div", "task-bar");
+    var name = el("div", "task-name");
+    name.appendChild(el("h3", null, t.judul));
+    if (t.matkul) name.appendChild(el("p", null, t.matkul));
+    bar.appendChild(name);
+
+    var url = safeUrl(t.link) || safeUrl(t.file);
+    if (url) {
+      var a = el("a", "open", "Open \u2197");
+      a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
+      a.setAttribute("aria-label", "Buka " + t.judul);
+      bar.appendChild(a);
+    } else {
+      bar.appendChild(el("span", "open off", "Segera"));
+    }
+    li.appendChild(bar);
+
+    var hit = el("button", "hit");
+    hit.type = "button";
+    hit.setAttribute("aria-label", "Lihat detail " + t.judul);
+    hit.addEventListener("click", function () { openDetail(t); });
+    li.appendChild(hit);
+
+    ul.appendChild(li);
+  });
+})();
+</script>
+</body>
+</html>
