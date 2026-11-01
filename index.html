@@ -277,28 +277,29 @@ var ANGGOTA = [
    - tanggal : "TAHUN-BULAN-TANGGAL", contoh "2026-09-22"
    - catatan : keterangan singkat (boleh dikosongkan) */
 var DEADLINE = [
-  { judul: "Project 1 : StokKu", tanggal: "2026-11-02", catatan: "RPL 2 · dikumpulkan lewat link" },
-]
+  { judul: "Project 1 : StokKu", tanggal: "2026-11-02", catatan: "RPL 2 · dikumpulkan lewat link" }
+];
 
 /* Daftar project/tugas. Tambah baru = salin satu blok { ... }, tempel, lalu ganti isinya.
    - gambar    : path gambar sampul, contoh "gambar/rpl.jpg". Kosongkan "" kalau belum ada.
    - tanggal   : tanggal pengerjaan, format "2026-09-12" (tampil di pop-up)
    - oleh      : 0 = dikerjakan berdua, 1 = anggota 1, 2 = anggota 2
    - deskripsi : penjelasan singkat, tampil di pop-up saat kartu diklik
-   - link      : alamat web (Google Drive, GitHub, dll). Kosongkan "" kalau tidak ada.
+   - link      : alamat hosting / web yang sudah online. Kosongkan "" kalau tidak ada.
+   - git       : alamat repository GitHub (github.com/...). Kosongkan "" kalau tidak ada.
    - file      : path file, contoh "tugas/laporan.pdf". Kosongkan "" kalau tidak ada.
-   Tombol OPEN di kartu membuka link dulu; kalau link kosong, membuka file.
-   Di pop-up, link dan file sama-sama muncul kalau diisi. */
+   Tombol OPEN di kartu membuka link (hosting) dulu; kalau kosong, membuka git, lalu file.
+   Di pop-up, file, hosting, dan GitHub sama-sama muncul kalau diisi. */
 var TUGAS = [
   {
     judul: "Project 1 : StokKu",
     matkul: "RPL 2",
     gambar: "StokKu.jpg",
-    tanggal: "2026-11-120",
+    tanggal: "2026-11-02",
     oleh: 0,
     deskripsi: "StokKu adalah aplikasi web untuk mencatat dan memantau stok barang di toko kelontong. Aplikasi ini menggantikan pencatatan manual dengan data yang tersimpan rapi di database, sehingga stok yang tersedia, barang yang hampir habis, dan riwayat keluar masuk barang bisa dilihat kapan saja.",
     link: "https://ycc-stokku.infinityfreeapp.com/stokku/public",
-    file: ""
+    git: "https://github.com/ulfamailani/StokKu"
   },
   {
     judul: "Contoh: Use Case dan Activity Diagram",
@@ -308,6 +309,7 @@ var TUGAS = [
     oleh: 1,
     deskripsi: "Diagram alur untuk fitur login, pemesanan, dan pembayaran. Ganti dengan penjelasan tugas kamu.",
     link: "",
+    git: "",
     file: "tugas/diagram.pdf"
   }
 ];
@@ -441,7 +443,7 @@ var TUGAS = [
     close.type = "button";
     close.addEventListener("click", closeDlg);
     acts.appendChild(close);
-    [["Buka file", safeUrl(t.file)], ["Buka link", safeUrl(t.link)]].forEach(function (b) {
+    [["Buka file", safeUrl(t.file)], ["Buka hosting", safeUrl(t.link)], ["Buka GitHub", safeUrl(t.git)]].forEach(function (b) {
       if (!b[1]) return;
       var a = el("a", "open", b[0]);
       a.href = b[1]; a.target = "_blank"; a.rel = "noopener noreferrer";
@@ -481,7 +483,7 @@ var TUGAS = [
     if (t.matkul) name.appendChild(el("p", null, t.matkul));
     bar.appendChild(name);
 
-    var url = safeUrl(t.link) || safeUrl(t.file);
+    var url = safeUrl(t.link) || safeUrl(t.git) || safeUrl(t.file);
     if (url) {
       var a = el("a", "open", "Open \u2197");
       a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
